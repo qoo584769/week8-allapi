@@ -12,7 +12,8 @@ const getPost = async (req, res, next) => {
   const _id = req._id
   const timeSort = req.query.timeSort == 'asc' ? 'createdAt' : '-createdAt'
   const id =
-    req.query._id !== undefined ? { _id: new RegExp(req.query._id) } : _id
+    // req.query._id !== undefined ? { _id: new RegExp(req.query._id) } : _id
+    req.query._id !== undefined ? { _id: req.query._id } : _id
   const data = {
     timeSort,
     id,

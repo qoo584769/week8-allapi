@@ -4,9 +4,9 @@ const { postModel } = require('../models/postModel')
 // 取得貼文
 const getPostDB = async (modelData) => {
   const { timeSort, id } = modelData
-  const result = await userModel
-    .findOne({ _id: id })
-    .populate({ path: 'postid' })
+  const result = await postModel
+    .find({_id:id})
+    .populate({ path: 'userid' })
     .sort(timeSort)
   return result
 }
@@ -27,23 +27,22 @@ const postPostDB = async (modelData) => {
 // 新增按讚
 const addLikeDB = async (modelData) => {
   const { postid, _id } = modelData
-  const result = await postModel.findByIdAndUpdate(
+  console.log(_id);
+  const result = await postModel.findOneAndUpdate(
     { _id: postid },
     { $addToSet: { likes: _id } },
     { new: true }
   )
-  console.log(result);
   return result
 }
 // 刪除按讚
 const removeLikeDB = async (modelData) => {
   const { postid, _id } = modelData
-  const result = await postModel.findByIdAndUpdate(
+  const result = await postModel.findOneAndUpdate(
     { _id: postid },
     { $pull: { likes: _id } },
     { new: true }
   )
-  console.log(result);
   return result
 }
 
