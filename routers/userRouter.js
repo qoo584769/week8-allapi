@@ -31,29 +31,29 @@ router.patch(
 )
 
 // ----------會員頁面資料----------
-// 追蹤
+// 追隨
 router.post(
   '/:userid/follow',
   handleErrorAsync(isAuth),
-  handleErrorAsync(userController.updatePassword)
+  handleErrorAsync(userController.follow)
 )
-// 取消追蹤
+// 取消追隨
 router.delete(
   '/:userid/unfollow',
   handleErrorAsync(isAuth),
-  handleErrorAsync(userController.updatePassword)
+  handleErrorAsync(userController.unFollow)
 )
-// 取得追蹤名單
+// 取得追隨名單
 router.get(
   '/following',
   handleErrorAsync(isAuth),
-  handleErrorAsync(userController.updatePassword)
+  handleErrorAsync(userController.following)
 )
 // 取得按讚名單
 router.get(
   '/getLikeList',
   handleErrorAsync(isAuth),
-  handleErrorAsync(userController.updatePassword)
+  handleErrorAsync(userController.getLikeList)
 )
 
 module.exports = router

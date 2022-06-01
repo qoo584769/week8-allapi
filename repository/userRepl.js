@@ -1,5 +1,6 @@
 const { userModel } = require('../models/userModel')
 
+// ---------------會員個人資料---------------
 // 註冊  modelData 為一個物件
 const signupDB = async (modelData) => {
   const { email } = modelData
@@ -58,10 +59,46 @@ const updateProfileDB = async (modelData) => {
   return result
 }
 
+// ---------------會員頁面資料---------------
+// 追隨  modelData 為一個物件
+const followDB = async (modelData) => {
+  const { followingId, followerId } = modelData
+  // 追隨的使用者
+  const followingUpdate = await userModel.findOneAndUpdate(
+    {
+      _id: followerId,
+      'following.user': { $ne: followingId.id },
+    },
+    {
+      $addToSet: { following: { user: followingId } },
+    },
+    {
+      new: true,
+    }
+  )
+  // 被追隨的使用者
+  const follower = await userModel.findOneAndUpdate(
+    {
+      _id: followingId,
+      'follower.user': { $ne: followerId.id },
+    },
+    {
+      $addToSet: { following: { user: followerId } },
+    },
+    {
+      new: true,
+    }
+  )
+  return 'success'
+}
+
 module.exports = {
+  // 會員個人資料
   signupDB,
   signinDB,
   updatePasswordDB,
   getProfileDB,
   updateProfileDB,
+  // 會員頁面資料
+  followDB,
 }

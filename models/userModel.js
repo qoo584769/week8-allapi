@@ -24,17 +24,41 @@ const userSchema = new Schema(
       enum: ['male', 'female'],
       default: 'male',
     },
-    createAt: {
-      type: Date,
-      default: Date.now,
-      select: false,
-    },
     postid: [
       {
         type: Schema.Types.ObjectId,
         ref: 'post',
       },
     ],
+    follower: [
+      {
+        user: {
+          type: Schema.Types.ObjectId,
+          ref: 'user',
+        },
+        createAt: {
+          type: Date,
+          default: Date.now,
+        },
+      },
+    ],
+    following: [
+      {
+        user: {
+          type: Schema.Types.ObjectId,
+          ref: 'user',
+        },
+        createAt: {
+          type: Date,
+          default: Date.now,
+        },
+      },
+    ],
+    createAt: {
+      type: Date,
+      default: Date.now,
+      select: false,
+    },
   },
   {
     versionKey: false,

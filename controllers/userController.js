@@ -9,9 +9,11 @@ const {
   updatePasswordDB,
   getProfileDB,
   updateProfileDB,
+  followDB,
 } = require('../repository/userRepl')
 const jwt = require('../utils/jwt')
 
+// ---------------會員個人資料---------------
 // 註冊
 const signup = async (req, res, next) => {
   const { name, email, password } = req.body
@@ -135,22 +137,21 @@ const getProfile = async (req, res, next) => {
 // 編輯會員資料
 const editProfile = async (req, res, next) => {
   let { id, name, gender, shot } = req.body
-  console.log(gender);
   const _id = req._id
   // 驗證是否同一帳號
   if (id !== _id) {
     return next(appErr(400, '帳號驗證錯誤，請重新登入', next))
   }
   // 使用者暱稱驗證
-  if (!name || name==='') {
+  if (!name || name === '') {
     name = '預設使用者'
   }
   // 性別驗證
-  if (!gender || gender==='') {
+  if (!gender || gender === '') {
     gender = 'male'
   }
   // 大頭照驗證
-  if (!shot || shot==='') {
+  if (!shot || shot === '') {
     shot = '預設使用者圖片'
   }
   const userData = {
@@ -167,4 +168,45 @@ const editProfile = async (req, res, next) => {
   })
 }
 
-module.exports = { signup, signin, updatePassword, getProfile, editProfile }
+// ---------------會員頁面資料---------------
+// 追隨
+const follow = async (req, res, next) => {
+  // 路由取得要追隨的使用者的 id
+  const followingId = req.params.userid
+  // token 解密的自己的 id
+  const tokenid = req._id
+  // 不能追隨自己
+  if (followingId === tokenid) {
+    return next(appErr(400, '無法追隨自己', next))
+  }
+  const modelData = {
+    // 追隨的使用者
+    followingId,
+    // 被追隨的使用者
+    followerId: tokenid,
+  }
+  const result = await followDB(modelData)
+  // 成功追隨
+  return res.status(200).json({
+    result,
+    message: '追隨成功',
+  })
+}
+// 取消追隨
+const unFollow = async (req, res, next) => {}
+// 取得追隨名單
+const following = async (req, res, next) => {}
+// 取得按讚名單
+const getLikeList = async (req, res, next) => {}
+
+module.exports = {
+  signup,
+  signin,
+  updatePassword,
+  getProfile,
+  editProfile,
+  follow,
+  unFollow,
+  following,
+  getLikeList,
+}
