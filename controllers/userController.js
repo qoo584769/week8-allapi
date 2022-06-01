@@ -11,6 +11,7 @@ const {
   updateProfileDB,
 } = require('../repository/userRepl')
 const jwt = require('../utils/jwt')
+
 // 註冊
 const signup = async (req, res, next) => {
   const { name, email, password } = req.body
@@ -58,6 +59,7 @@ const signup = async (req, res, next) => {
     ...result,
   })
 }
+
 // 登入
 const signin = async (req, res, next) => {
   const { email, password } = req.body
@@ -88,6 +90,7 @@ const signin = async (req, res, next) => {
     message: '登入成功',
   })
 }
+
 // 更新密碼
 const updatePassword = async (req, res, next) => {
   const { id, password, passwordConfirm } = req.body
@@ -111,6 +114,7 @@ const updatePassword = async (req, res, next) => {
     message: '密碼更新成功',
   })
 }
+
 // 取得會員資料
 const getProfile = async (req, res, next) => {
   const { id } = req.body
@@ -127,6 +131,7 @@ const getProfile = async (req, res, next) => {
     message: '取得使用者資料成功',
   })
 }
+
 // 編輯會員資料
 const editProfile = async (req, res, next) => {
   let { id, name, gender, shot } = req.body
