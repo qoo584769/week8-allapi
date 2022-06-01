@@ -28,8 +28,17 @@ const postSchema = new Schema(
   },
   {
     versionKey: false,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
   }
 )
+
+// 虛擬引用  不直接寫死在model 沒有populate就不會顯示 可以關聯非 _id 的欄位
+postSchema.virtual('comments', {
+  ref: 'comment',
+  foreignField: 'postid',
+  localField: '_id',
+})
 
 const postModel = model('post', postSchema)
 

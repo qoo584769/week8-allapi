@@ -19,6 +19,12 @@ router.post(
   handleErrorAsync(isAuth),
   handleErrorAsync(postController.postPost)
 )
+// 貼文留言
+router.post(
+  '/:postid/comment',
+  handleErrorAsync(isAuth),
+  handleErrorAsync(postController.commentPost)
+)
 // 新增按讚
 router.post(
   '/:postid/like',

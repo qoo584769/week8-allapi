@@ -3,6 +3,7 @@ const appErr = require('../utils/appErr')
 const {
   getPostDB,
   postPostDB,
+  addCommentDB,
   addLikeDB,
   removeLikeDB,
 } = require('../repository/postRepl')
@@ -29,6 +30,7 @@ const getPost = async (req, res, next) => {
     message: '貼文取得成功',
   })
 }
+
 // 發佈貼文
 const postPost = async (req, res, next) => {
   const { userid, content } = req.body
@@ -49,6 +51,30 @@ const postPost = async (req, res, next) => {
     message: '貼文發佈成功',
   })
 }
+
+// 貼文留言
+const commentPost = async (req, res, next) => {
+  // 貼文ID
+  const postid = req.params.postid
+  // 使用者ID
+  const _id = req._id
+  const { comment } = req.body
+  if (!comment) {
+    return next(appErr(400, '留言內容需填寫', next))
+  }
+  const modelData = {
+    postid,
+    _id,
+    comment,
+  }
+  const result = await addCommentDB(modelData)
+  // 留言成功
+  return res.status(200).json({
+    result,
+    message: '留言成功',
+  })
+}
+
 // 新增按讚
 const addLike = async (req, res, next) => {
   // 貼文ID
@@ -57,7 +83,7 @@ const addLike = async (req, res, next) => {
   const _id = req._id
   const modelData = { postid, _id }
   const result = await addLikeDB(modelData)
-  if(!result){
+  if (!result) {
     return next(appErr(400, '查無此貼文', next))
   }
   // 按讚成功
@@ -66,21 +92,22 @@ const addLike = async (req, res, next) => {
     message: '按讚成功',
   })
 }
+
 // 取消按讚
 const removeLike = async (req, res, next) => {
-   // 貼文ID
-   const postid = req.params.postid
-   // 使用者ID
-   const _id = req._id
-   const modelData = { postid, _id }
-   const result = await removeLikeDB(modelData)
-   if(!result){
-     return next(appErr(400, '查無此貼文', next))
-   }
-   // 取消按讚成功
-   return res.status(200).json({
-     result,
-     message: '取消按讚成功',
-   })
+  // 貼文ID
+  const postid = req.params.postid
+  // 使用者ID
+  const _id = req._id
+  const modelData = { postid, _id }
+  const result = await removeLikeDB(modelData)
+  if (!result) {
+    return next(appErr(400, '查無此貼文', next))
+  }
+  // 取消按讚成功
+  return res.status(200).json({
+    result,
+    message: '取消按讚成功',
+  })
 }
-module.exports = { getPost, postPost, addLike, removeLike }
+module.exports = { getPost, postPost,commentPost, addLike, removeLike }
