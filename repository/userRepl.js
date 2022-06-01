@@ -91,6 +91,35 @@ const followDB = async (modelData) => {
   )
   return 'success'
 }
+// 追隨  modelData 為一個物件
+const unFollowDB = async (modelData) => {
+  const { followingId, followerId } = modelData
+  // 追隨的使用者
+  const followingUpdate = await userModel.findOneAndUpdate(
+    {
+      _id: followerId,
+    },
+    {
+      $pull: { following: { user: followingId } },
+    },
+    {
+      new: true,
+    }
+  )
+  // 被追隨的使用者
+  const follower = await userModel.findOneAndUpdate(
+    {
+      _id: followingId,
+    },
+    {
+      $pull: { following: { user: followerId } },
+    },
+    {
+      new: true,
+    }
+  )
+  return 'success'
+}
 
 module.exports = {
   // 會員個人資料
@@ -101,4 +130,5 @@ module.exports = {
   updateProfileDB,
   // 會員頁面資料
   followDB,
+  unFollowDB
 }

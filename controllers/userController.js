@@ -10,6 +10,7 @@ const {
   getProfileDB,
   updateProfileDB,
   followDB,
+  unFollowDB
 } = require('../repository/userRepl')
 const jwt = require('../utils/jwt')
 
@@ -193,7 +194,28 @@ const follow = async (req, res, next) => {
   })
 }
 // 取消追隨
-const unFollow = async (req, res, next) => {}
+const unFollow = async (req, res, next) => {
+  // 路由取得要取消追隨的使用者的 id
+  const followingId = req.params.userid
+  // token 解密的自己的 id
+  const tokenid = req._id
+  // 不能取消追隨自己
+  if (followingId === tokenid) {
+    return next(appErr(400, '無法取消追隨自己', next))
+  }
+  const modelData = {
+    // 要取消追隨的使用者
+    followingId,
+    // 要取消被追隨的使用者
+    followerId: tokenid,
+  }
+  const result = await unFollowDB(modelData)
+  // 成功取消追隨
+  return res.status(200).json({
+    result,
+    message: '取消追隨成功',
+  })
+}
 // 取得追隨名單
 const following = async (req, res, next) => {}
 // 取得按讚名單
