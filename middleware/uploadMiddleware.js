@@ -3,8 +3,6 @@ const path = require('path')
 // 上傳檔案驗證模組
 const multer = require('multer')
 
-const appErr = require('../utils/appErr')
-
 // 驗證檔案模式及大小
 const imageCheck = multer({
   // 限制上傳檔案的最大大小 沒寫就是不限制大小

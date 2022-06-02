@@ -1,0 +1,591 @@
+{
+	"info": {
+		"_postman_id": "207d1a2b-3071-48d1-b09b-9d22df71a767",
+		"name": "week8-allapi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "貼文系統",
+			"item": [
+				{
+					"name": "取得貼文",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOThiZjc4NGY1M2RmZWI0ODEzMDgyMyIsImlhdCI6MTY1NDE3NzY5NCwiZXhwIjoxNjU0MTgxMjk0fQ.-PI43PqMUVLkxc3-G-FwjkiOoxPSGXw5hX9tLlwXAG4",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://week8-allapi.herokuapp.com/posts",
+							"protocol": "https",
+							"host": [
+								"week8-allapi",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取得單一貼文",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOThiZjc4NGY1M2RmZWI0ODEzMDgyMyIsImlhdCI6MTY1NDE3NzY5NCwiZXhwIjoxNjU0MTgxMjk0fQ.-PI43PqMUVLkxc3-G-FwjkiOoxPSGXw5hX9tLlwXAG4",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "https://week8-allapi.herokuapp.com/posts/6298bfd74f53dfeb48130829",
+							"protocol": "https",
+							"host": [
+								"week8-allapi",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"posts",
+								"6298bfd74f53dfeb48130829"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取得使用者貼文",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOThiZjc4NGY1M2RmZWI0ODEzMDgyMyIsImlhdCI6MTY1NDE3NzY5NCwiZXhwIjoxNjU0MTgxMjk0fQ.-PI43PqMUVLkxc3-G-FwjkiOoxPSGXw5hX9tLlwXAG4",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "https://week8-allapi.herokuapp.com/posts/user/6298bf784f53dfeb48130823",
+							"protocol": "https",
+							"host": [
+								"week8-allapi",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"posts",
+								"user",
+								"6298bf784f53dfeb48130823"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "發布貼文",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOThiZjc4NGY1M2RmZWI0ODEzMDgyMyIsImlhdCI6MTY1NDE3NzY5NCwiZXhwIjoxNjU0MTgxMjk0fQ.-PI43PqMUVLkxc3-G-FwjkiOoxPSGXw5hX9tLlwXAG4",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userid\":\"6298bf784f53dfeb48130823\",\r\n    \"content\":\"第1個使用者\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://week8-allapi.herokuapp.com/posts",
+							"protocol": "https",
+							"host": [
+								"week8-allapi",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "新增按讚",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOThiZjc4NGY1M2RmZWI0ODEzMDgyMyIsImlhdCI6MTY1NDE3NzY5NCwiZXhwIjoxNjU0MTgxMjk0fQ.-PI43PqMUVLkxc3-G-FwjkiOoxPSGXw5hX9tLlwXAG4",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://week8-allapi.herokuapp.com/posts/6298bfd74f53dfeb48130829/like",
+							"protocol": "https",
+							"host": [
+								"week8-allapi",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"posts",
+								"6298bfd74f53dfeb48130829",
+								"like"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取消按讚",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOTVmOWYyNDJlNjY0ZjZiMjQzOWFjZSIsImlhdCI6MTY1Mzk5ODk2NywiZXhwIjoxNjU0MDAyNTY3fQ.4zhQLqhTQ9VXBUJ3W9hUhIQtIi7JYqSATpbwhXlCXqc",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "https://week8-allapi.herokuapp.com/posts/62960067497043c7779fb978/like",
+							"protocol": "https",
+							"host": [
+								"week8-allapi",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"posts",
+								"62960067497043c7779fb978",
+								"like"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "新增留言",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOThiZjc4NGY1M2RmZWI0ODEzMDgyMyIsImlhdCI6MTY1NDE3NzY5NCwiZXhwIjoxNjU0MTgxMjk0fQ.-PI43PqMUVLkxc3-G-FwjkiOoxPSGXw5hX9tLlwXAG4",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"comment\":\"第1個留言\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://week8-allapi.herokuapp.com/posts/6298bfd74f53dfeb48130829/comment",
+							"protocol": "https",
+							"host": [
+								"week8-allapi",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"posts",
+								"6298bfd74f53dfeb48130829",
+								"comment"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "會員系統",
+			"item": [
+				{
+					"name": "會員註冊",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"user2\",\r\n    \"email\":\"user2@gmail.com\",\r\n    \"password\":\"123456aA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://week8-allapi.herokuapp.com/users/sign_up",
+							"protocol": "https",
+							"host": [
+								"week8-allapi",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"users",
+								"sign_up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "會員登入",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"user1@gmail.com\",\r\n    \"password\":\"123456aA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://week8-allapi.herokuapp.com/users/sign_in",
+							"protocol": "https",
+							"host": [
+								"week8-allapi",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"users",
+								"sign_in"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "變更密碼",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOTRhMmVhMWE2OTAwZjI0ZjZjM2YxNCIsImlhdCI6MTY1MzkwODIyMywiZXhwIjoxNjUzOTExODIzfQ.NPOFtS0OIA1IifSzYL_LS1adl3bD1rdKKf8_DD7hhrg",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"6294a2ea1a6900f24f6c3f14\",\r\n    \"password\":\"123456aA\",\r\n    \"passwordConfirm\":\"123456aA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://week8-allapi.herokuapp.com/users/updatePassword",
+							"protocol": "https",
+							"host": [
+								"week8-allapi",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"users",
+								"updatePassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取得會員資料",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOThiZjc4NGY1M2RmZWI0ODEzMDgyMyIsImlhdCI6MTY1NDE3NzY5NCwiZXhwIjoxNjU0MTgxMjk0fQ.-PI43PqMUVLkxc3-G-FwjkiOoxPSGXw5hX9tLlwXAG4",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"6298bf784f53dfeb48130823\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://week8-allapi.herokuapp.com/users/profile",
+							"protocol": "https",
+							"host": [
+								"week8-allapi",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"users",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "編輯會員資料",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOTRhMmVhMWE2OTAwZjI0ZjZjM2YxNCIsImlhdCI6MTY1MzkwODIyMywiZXhwIjoxNjUzOTExODIzfQ.NPOFtS0OIA1IifSzYL_LS1adl3bD1rdKKf8_DD7hhrg",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"6294a2ea1a6900f24f6c3f14\",\r\n    \"name\":\"測試使用者\",\r\n    \"gender\":\"\",\r\n    \"shot\":\"\"\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://week8-allapi.herokuapp.com/users/profile",
+							"protocol": "https",
+							"host": [
+								"week8-allapi",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"users",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "追隨",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOThiZjc4NGY1M2RmZWI0ODEzMDgyMyIsImlhdCI6MTY1NDE3NzY5NCwiZXhwIjoxNjU0MTgxMjk0fQ.-PI43PqMUVLkxc3-G-FwjkiOoxPSGXw5hX9tLlwXAG4",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://week8-allapi.herokuapp.com/users/6298bf814f53dfeb48130826/follow",
+							"protocol": "https",
+							"host": [
+								"week8-allapi",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"users",
+								"6298bf814f53dfeb48130826",
+								"follow"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取消追隨",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOTVmOWYyNDJlNjY0ZjZiMjQzOWFjZSIsImlhdCI6MTY1NDA5NDYwOCwiZXhwIjoxNjU0MDk4MjA4fQ.PbdhQNHi2eTkYuJTZq-pFC0Ydmw93VSTMrFAarDF4t0",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "https://week8-allapi.herokuapp.com/users/629602ccdbccf131da0f7f0d/unfollow",
+							"protocol": "https",
+							"host": [
+								"week8-allapi",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"users",
+								"629602ccdbccf131da0f7f0d",
+								"unfollow"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取得追隨名單",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOThiZjc4NGY1M2RmZWI0ODEzMDgyMyIsImlhdCI6MTY1NDE3NzY5NCwiZXhwIjoxNjU0MTgxMjk0fQ.-PI43PqMUVLkxc3-G-FwjkiOoxPSGXw5hX9tLlwXAG4",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "https://week8-allapi.herokuapp.com/users/following",
+							"protocol": "https",
+							"host": [
+								"week8-allapi",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"users",
+								"following"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取得按讚名單",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOThiZjc4NGY1M2RmZWI0ODEzMDgyMyIsImlhdCI6MTY1NDE3NzY5NCwiZXhwIjoxNjU0MTgxMjk0fQ.-PI43PqMUVLkxc3-G-FwjkiOoxPSGXw5hX9tLlwXAG4",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "https://week8-allapi.herokuapp.com/users/getLikeList",
+							"protocol": "https",
+							"host": [
+								"week8-allapi",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"users",
+								"getLikeList"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "檔案上傳",
+			"item": [
+				{
+					"name": "圖片上傳",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOThiZjc4NGY1M2RmZWI0ODEzMDgyMyIsImlhdCI6MTY1NDE3NzY5NCwiZXhwIjoxNjU0MTgxMjk0fQ.-PI43PqMUVLkxc3-G-FwjkiOoxPSGXw5hX9tLlwXAG4",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "",
+									"type": "file",
+									"src": "/C:/Users/money/Desktop/mon.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://week8-allapi.herokuapp.com/upload",
+							"protocol": "https",
+							"host": [
+								"week8-allapi",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"upload"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

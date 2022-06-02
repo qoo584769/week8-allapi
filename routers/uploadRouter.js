@@ -12,7 +12,7 @@ const handleErrorAsync = require('../middleware/errorHandler')
 router.post(
   '/',
   handleErrorAsync(isAuth),
-  (imageCheck),
+  imageCheck,
   handleErrorAsync(uploadController.imageUpload)
 )
 
