@@ -10,7 +10,9 @@ const {
   getProfileDB,
   updateProfileDB,
   followDB,
-  unFollowDB
+  unFollowDB,
+  followingDB,
+  getLikeListDB,
 } = require('../repository/userRepl')
 const jwt = require('../utils/jwt')
 
@@ -217,9 +219,25 @@ const unFollow = async (req, res, next) => {
   })
 }
 // 取得追隨名單
-const following = async (req, res, next) => {}
+const following = async (req, res, next) => {
+  const _id = req._id
+  const result = await followingDB(_id)
+  // 成功取得追隨名單
+  return res.status(200).json({
+    result,
+    message: '成功取得追隨名單',
+  })
+}
 // 取得按讚名單
-const getLikeList = async (req, res, next) => {}
+const getLikeList = async (req, res, next) => {
+  const _id = req._id
+  const result = await getLikeListDB(_id)
+  // 成功取得按讚名單
+  return res.status(200).json({
+    result,
+    message: '成功取得按讚名單',
+  })
+}
 
 module.exports = {
   signup,

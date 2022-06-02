@@ -7,11 +7,23 @@ const isAuth = require('../middleware/isAuth')
 
 const handleErrorAsync = require('../middleware/errorHandler')
 
-// 取得所有動態
+// 取得所有貼文
 router.get(
   '/',
   handleErrorAsync(isAuth),
   handleErrorAsync(postController.getPost)
+)
+// 取得單一貼文
+router.get(
+  '/:postid',
+  handleErrorAsync(isAuth),
+  handleErrorAsync(postController.getSpecificPost)
+)
+// 取得個人所有貼文
+router.get(
+  '/user/:userid',
+  handleErrorAsync(isAuth),
+  handleErrorAsync(postController.getUserPost)
 )
 // 張貼動態
 router.post(

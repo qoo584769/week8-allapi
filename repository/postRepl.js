@@ -4,20 +4,33 @@ const { commentModel } = require('../models/commentModel')
 
 // 取得貼文
 const getPostDB = async (modelData) => {
-  const { timeSort, id } = modelData
+  const { timeSort, q } = modelData
   const result = await postModel
-    .find({ _id: id })
+    .find(q)
     .populate({ path: 'userid' })
-    .populate({ path: 'comments',select:'comment' })
+    .populate({ path: 'comments', select: 'comment' })
     .sort(timeSort)
   return result
 }
-
+// 取得單一貼文
+const getSpecificPostDB = async (modelData) => {
+  const result = await postModel
+    .findOne({ _id: modelData })
+    .populate({ path: 'comments' })
+  return result
+}
+// 取得使用者所有貼文
+const getUserPostDB = async (modelData) => {
+  const result = await postModel
+    .find({ userid: modelData })
+    .populate({ path: 'comments' })
+  return result
+}
 // 新增貼文
 const postPostDB = async (modelData) => {
-  const { _id, content } = modelData
+  const { userid, content } = modelData
   // 新增貼文
-  const newPost = await postModel.create({ userid: _id, content })
+  const newPost = await postModel.create({ userid, content })
   // 新增貼文成功會把貼文ID加入發文者的貼文裡面
   const addPostIdtoUser = await userModel.findByIdAndUpdate(
     { _id: newPost.userid },
@@ -31,7 +44,7 @@ const postPostDB = async (modelData) => {
 // 新增留言
 const addCommentDB = async (modelData) => {
   const { postid, _id, comment } = modelData
-  const newComment = await commentModel.create({ postid, userid: _id, comment })  
+  const newComment = await commentModel.create({ postid, userid: _id, comment })
   console.log(newComment)
   return newComment
 }
@@ -61,6 +74,8 @@ const removeLikeDB = async (modelData) => {
 
 module.exports = {
   getPostDB,
+  getSpecificPostDB,
+  getUserPostDB,
   postPostDB,
   addCommentDB,
   addLikeDB,

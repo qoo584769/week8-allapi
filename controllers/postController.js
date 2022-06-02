@@ -2,32 +2,49 @@ const appErr = require('../utils/appErr')
 
 const {
   getPostDB,
+  getSpecificPostDB,
+  getUserPostDB,
   postPostDB,
   addCommentDB,
   addLikeDB,
   removeLikeDB,
 } = require('../repository/postRepl')
 
-// 取的貼文
+// 取得所有貼文
 const getPost = async (req, res, next) => {
-  const _id = req._id
   const timeSort = req.query.timeSort == 'asc' ? 'createdAt' : '-createdAt'
-  const id =
-    // req.query._id !== undefined ? { _id: new RegExp(req.query._id) } : _id
-    req.query._id !== undefined ? { _id: req.query._id } : _id
+  const q =
+    req.query.q !== undefined ? { content: new RegExp(req.query.q) } : {}
   const data = {
     timeSort,
-    id,
+    q,
   }
   const result = await getPostDB(data)
-  // 如果要取得別的會員的貼文資料
-  if (!result) {
-    return next(appErr(400, '此會員尚未註冊', next))
-  }
+
   // 貼文取得成功
   return res.status(200).json({
     result,
     message: '貼文取得成功',
+  })
+}
+// 取得單一貼文
+const getSpecificPost = async (req, res, next) => {
+  const { postid } = req.params
+  const result = await getSpecificPostDB(postid)
+  // 貼文取得成功
+  return res.status(200).json({
+    result,
+    message: '單一貼文成功',
+  })
+}
+// 取得使用者所有貼文
+const getUserPost = async (req, res, next) => {
+  const { userid } = req.params
+  const result = await getUserPostDB(userid)
+  // 貼文取得成功
+  return res.status(200).json({
+    result,
+    message: '使用者貼文取得成功',
   })
 }
 
@@ -42,7 +59,7 @@ const postPost = async (req, res, next) => {
   if (content === undefined) {
     return next(appErr(400, '貼文內容未填寫', next))
   }
-  const data = { _id, content }
+  const data = { userid, content }
   // 新增新貼文
   const result = await postPostDB(data)
   // 新增貼文成功
@@ -110,4 +127,12 @@ const removeLike = async (req, res, next) => {
     message: '取消按讚成功',
   })
 }
-module.exports = { getPost, postPost,commentPost, addLike, removeLike }
+module.exports = {
+  getPost,
+  getSpecificPost,
+  getUserPost,
+  postPost,
+  commentPost,
+  addLike,
+  removeLike,
+}
