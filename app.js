@@ -4,6 +4,8 @@ require('./connection/mongooseDB')
 const userRouter = require('./routers/userRouter')
 const postRouter = require('./routers/postRouter')
 const uploadRouter = require('./routers/uploadRouter')
+// 寄信路由
+const mailRouter = require('./routers/mailRouter')
 
 const app = express()
 
@@ -13,6 +15,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/users', userRouter)
 app.use('/posts', postRouter)
 app.use('/upload',uploadRouter)
+// 寄信路由
+app.use('/mail',mailRouter)
 
 // 判斷網址不存在
 app.use((req, res, next) => {

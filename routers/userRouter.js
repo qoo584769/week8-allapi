@@ -17,6 +17,11 @@ router.post(
   handleErrorAsync(isAuth),
   handleErrorAsync(userController.updatePassword)
 )
+// 重設密碼
+router.post(
+  '/resetPassword',
+  handleErrorAsync(userController.resetPassword)
+)
 // 取得會員資料
 router.get(
   '/profile',

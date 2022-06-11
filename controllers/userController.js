@@ -7,6 +7,7 @@ const {
   signupDB,
   signinDB,
   updatePasswordDB,
+  updatePasswordViaEmailDB,
   getProfileDB,
   updateProfileDB,
   followDB,
@@ -117,6 +118,31 @@ const updatePassword = async (req, res, next) => {
   return res.status(200).json({
     result,
     message: '密碼更新成功',
+  })
+}
+
+// 信箱重設密碼
+const resetPassword = async (req, res, next) => {
+  const { token, email, password } = req.body
+  if (!token || !email || !password) {
+    return next(appErr(400, '憑證 信箱 密碼 需填寫', next))
+  }
+  //加密新密碼
+  hashedPassword = await bcrypt.hash(password, 12)
+  const modelData = {
+    token,
+    email,
+    password:hashedPassword
+  }
+  // 透過信箱改密碼
+  const result = await updatePasswordViaEmailDB(modelData)
+  if (result === null) {
+    return next(appErr(400, '憑證過期或資料錯誤', next))
+  }
+  // 密碼更新成功
+  return res.status(200).json({
+    result,
+    message: '密碼重設成功',
   })
 }
 
@@ -243,6 +269,7 @@ module.exports = {
   signup,
   signin,
   updatePassword,
+  resetPassword,
   getProfile,
   editProfile,
   follow,

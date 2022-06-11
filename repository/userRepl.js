@@ -29,13 +29,45 @@ const signinDB = async (modelData) => {
   console.log(result)
   return result
 }
-// 重設密碼  modelData 為一個物件
+// 更新密碼  modelData 為一個物件
 const updatePasswordDB = async (modelData) => {
   const { _id, password } = modelData
   const result = await userModel.findByIdAndUpdate(
     _id,
     {
       password,
+    },
+    {
+      new: true,
+      runValidators: true,
+    }
+  )
+  return result
+}
+// 重設密碼驗證信的 token 加入資料庫  modelData唯一個物件
+const forgotPasswordDB = async (modelData) => {
+  const { email, resetPasswordToken, resetPasswordExpires } = modelData
+  const result = userModel.findOneAndUpdate(
+    { email },
+    { resetPasswordToken, resetPasswordExpires },
+    { new: true }
+  )
+
+  return result
+}
+// 透過信箱驗證信更新密碼
+const updatePasswordViaEmailDB = async (modelData) => {
+  const { token, email, password } = modelData
+  const result = await userModel.findOneAndUpdate(
+    {
+      email,
+      resetPasswordToken: token,
+      resetPasswordExpires: { $gt: Date.now() },
+    },
+    {
+      password,
+      resetPasswordToken: null,
+      resetPasswordExpires: null,
     },
     {
       new: true,
@@ -144,11 +176,13 @@ module.exports = {
   signupDB,
   signinDB,
   updatePasswordDB,
+  forgotPasswordDB,
+  updatePasswordViaEmailDB,
   getProfileDB,
   updateProfileDB,
   // 會員頁面資料
   followDB,
   unFollowDB,
   followingDB,
-  getLikeListDB
+  getLikeListDB,
 }
